@@ -1,0 +1,25 @@
+.idea
+.vagrant
+.DS_Store
+.tmp
+*.pyc
+media/*
+
+!media/.keep
+
+# dotenv
+.env
+
+# virtualenv
+.venv
+venv/
+ENV/
+.vscode
+
+# django migrations 
+#
+**/migrations/**
+!**/migrations
+!**/migrations/__init__.py
+
+__pycache__/
