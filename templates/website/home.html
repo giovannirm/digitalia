@@ -1,0 +1,139 @@
+{% extends 'base.html' %}
+{% block title %} Home {% endblock %}
+
+{% block styles %}
+<style>
+  .content {
+    height: 100vh;
+    overflow: hidden;
+    width: 100%;
+    display: flex;
+    gap: 1em;
+  }
+
+  .content-right {
+    width: 40%;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1em;
+    justify-content: center;
+    border: none;
+    align-self: center;
+    border-radius: 1em;
+    margin-left: 1em;
+    border: 1px solid #ced4da;
+  }
+
+  .content-right h1 {
+    width: 100%;
+    background: rgba(0,0,0,.03);
+    height: 2em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .content-right input {
+    width: 100%;
+    outline: none;
+    border: 1px solid #ced4da;
+    padding: 0.75em 1.2em;
+    border-radius: 0.5em;
+  }
+
+  .card-header {
+    font-size: 2em;
+    font-weight: bold;
+  }
+
+  .card-body {
+    padding: 1em;
+  }
+
+  .card-body button {
+    padding: 0.5em 1em;
+    border-radius: 0.5em;
+    font-size: 1.1em;
+    background: #28a745;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+
+  .card {
+    border-radius: 1em;
+  }
+
+  .defect{
+    border: 1px solid #ced4da;
+  }
+
+  .assist {
+    color: white;
+    background: #007bff;
+  }
+
+  .system {
+    color: white;
+    background: #17a2b8;
+  }
+
+
+  #csvForm {
+    display: flex;
+    padding: 1em 0;
+    flex-direction: column;
+    gap: 1em;
+  }
+
+  .chat-history {
+    height: 100%;
+    overflow: auto;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    padding: 1em;
+  }
+
+  @media  screen and (max-width: 700px) {
+    .content {
+      padding: 1em 0;
+      flex-direction: column;
+      overflow: auto;
+    }
+
+    .content-right {
+      width: 90%;
+      margin-left:0
+    }
+
+    .chat-history {
+      overflow: visible;
+    }
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="content">
+    <div class="content-right">
+      <h1 class="card-header text-center">DIGITALIA</h1>
+      <div class="card-body">
+        <form id="csvForm" method="POST" enctype="multipart/form-data">
+          {% csrf_token %}
+          <label for="api_key" class="form-label">Ingresa tu clave API secreta de OpenAI</label>
+          <input class="form-control mb-2" required type="text" autofocus="autofocus" name="api_key">
+          <label for="file_csv" class="form-label">Ingresa el archivo CSV a analizar</label>
+          <input class="form-control mb-2" required type="file" name="file_csv" accept=".csv">
+          <button class="btn btn-success fw-bold" type="submit">
+            Analizar
+          </button>
+        </form>
+      </div>
+    </div>
+    <div id="chatHistory" class="chat-history mt-3"></div>
+</div>
+{% endblock %}
