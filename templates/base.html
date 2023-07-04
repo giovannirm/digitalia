@@ -38,10 +38,10 @@
       }).then(response => response.json())
       .then(data => {
         const chatHistory = document.getElementById("chatHistory");
+        console.log(data);
         const { messages } = data;
 
         if(!messages) return alert("Ingresa una clave API válida de OpenAI");
-
         chatHistory.innerHTML = messages.map(message => {
           const { role, content } = message;
           const  classes = {

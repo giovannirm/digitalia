@@ -32,7 +32,7 @@ def upload_csv(request):
             for column in data.columns:
                 values_per_column = data[column].values
                 values_per_column = str(values_per_column.tolist())
-                print(values_per_column)
+                
                 messages.append({ "role": "user", "content": prompt.format(values_per_column) })
             
                 response = openai.ChatCompletion.create(
@@ -59,11 +59,7 @@ def upload_csv(request):
             formatted_response = response['choices'][0]['message']['content']
             messages.append({ "role": "assistant", "content": formatted_response })
 
-            context = {
-                "messages": messages
-            }
-
-            return JsonResponse({'response': 'Archivo cargado y procesado con éxito.', "messages": context }, status=200)
+            return JsonResponse({'response': 'Archivo cargado y procesado con éxito.', "messages": messages }, status=200)
         except Exception as e:
             return JsonResponse({'message': 'Error al procesar el archivo CSV.'}, status=500)
 
