@@ -1,5 +1,4 @@
 import pandas as pd
-import csv
 import openai
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt

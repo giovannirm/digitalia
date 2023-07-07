@@ -3,10 +3,11 @@
 import os
 import sys
 
-
 def main():
     BASE_DIR = os.path.dirname(os.path.dirname(__file__))
-    PATHS = [os.path.realpath(os.path.join(BASE_DIR, "apps"))]
+
+    # realpath() trae la ruta real si en caso apunta a un enlace simbólico
+    PATHS = [os.path.realpath(os.path.join(BASE_DIR, "apps")), os.path.realpath(os.path.join(BASE_DIR, "tests"))]
     for path in PATHS:
         sys.path.insert(0, path)
 

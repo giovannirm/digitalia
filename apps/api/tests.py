@@ -1,16 +1,17 @@
 from django.test import TestCase
 from django.urls import reverse
-from django.test import Client
+from django.test import RequestFactory
 from django.core.files.uploadedfile import SimpleUploadedFile
+import json
 
 from .views import upload_csv
 
 class UploadCSVTestCase(TestCase):
 
-    def test_my_function(self):
-        client = Client()
-        url = reverse('http://127.0.0.1:8000/v1/api/upload-csv/')
-
+    def test_error_processing_csv(self):
+        request_factory = RequestFactory()
+        url = reverse('upload_csv')
+        
         # Los parámetros de la solicitud POST
         data = {
             'api_key': 'YOUR_API_KEY',
@@ -23,17 +24,20 @@ class UploadCSVTestCase(TestCase):
         )
 
         csv_file = SimpleUploadedFile('test_file.csv', csv_content, content_type='text/csv')
-
+        
         data = {
             'param1': 'valor1',
         }
 
-        files = {
-            'file_param': csv_file,
-        }
-
-        response = client.post(url, data, files)
-
-        # Comprueba el resultado esperado
+        request = request_factory.post(url, data=data)
+        request.FILES['file_csv'] = csv_file
+        
+        # Realizar la solicitud POST
+        response = upload_csv(request)
+        
+        content = response.content.decode("utf-8")
+        data = json.loads(content)
+    
+        # # Comprueba el resultado esperado
         self.assertEqual(response.status_code, 500)
-        self.assertEqual(response.json()['result'], 'Error al procesar el archivo CSV.')
+        self.assertEqual(data['message'], 'Error al procesar el archivo CSV.')

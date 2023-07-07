@@ -15,7 +15,11 @@
 
     card-body {
       padding: 10px;
+    }
 
+    .disabled {
+      pointer-events: none;
+      opacity: 0.5;
     }
   </style>
   
@@ -32,6 +36,10 @@
     const form = document.getElementById("csvForm");
     form.addEventListener("submit", (event) => {
       event.preventDefault();
+      
+      btn = document.getElementById("btn-analyze")
+      btn.classList.add("disabled");
+      
       const response = fetch("http://127.0.0.1:8000/v1/api/upload-csv/", {
         method: "POST",
         body: new FormData(form)
@@ -56,7 +64,9 @@
               </div>
             </div>`
         }).join('');
-      })
+      }).finally(() => {
+        btn.classList.remove("disabled");
+      });
     });
   </script>
   {% endblock scripts %}
