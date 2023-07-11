@@ -1,28 +1,13 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{% block title %}{% endblock title %}</title>
-
-  <style>
-    * {
-      padding: 0;
-      margin: 0;
-      box-sizing: border-box;
-      font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
-    }
-
-    card-body {
-      padding: 10px;
-    }
-
-    .disabled {
-      pointer-events: none;
-      opacity: 0.5;
-    }
-  </style>
   
+  <link rel="stylesheet" href="{% static 'css/general.css' %}">
+
   {% block styles %}
   {% endblock styles %}
   
@@ -32,43 +17,6 @@
   {% endblock content %}
 
   {% block scripts %}
-  <script>
-    const form = document.getElementById("csvForm");
-    form.addEventListener("submit", (event) => {
-      event.preventDefault();
-      
-      btn = document.getElementById("btn-analyze")
-      btn.classList.add("disabled");
-      
-      const response = fetch("http://127.0.0.1:8000/v1/api/upload-csv/", {
-        method: "POST",
-        body: new FormData(form)
-      }).then(response => response.json())
-      .then(data => {
-        const chatHistory = document.getElementById("chatHistory");
-        console.log(data);
-        const { messages } = data;
-
-        if(!messages) return alert("Ingresa una clave API válida de OpenAI");
-        chatHistory.innerHTML = messages.map(message => {
-          const { role, content } = message;
-          const  classes = {
-            assistant: 'assist',
-            customer: 'defect',
-            system: 'system'
-          }[role]
-          return `
-            <div class="card ${classes}">
-              <div class="card-body">
-                <strong>${ role }:</strong> ${content}
-              </div>
-            </div>`
-        }).join('');
-      }).finally(() => {
-        btn.classList.remove("disabled");
-      });
-    });
-  </script>
   {% endblock scripts %}
 </body>
 </html>

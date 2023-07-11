@@ -6,5 +6,7 @@ from .views import *
 
 # a list of all the urls
 urlpatterns = [
-    path("upload-csv/", upload_csv, name="upload_csv")
+    path("upload-csv/", upload_csv, name="upload_csv"),
+    path("user-authenticate/", user_authenticate, name="user_authenticate"),
+    path("user-logout/", user_logout, name="user_logout"),
 ]

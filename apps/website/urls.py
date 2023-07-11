@@ -6,5 +6,5 @@ from .views import *
 
 # a list of all the urls
 urlpatterns = [
-    path("home/", home, name="home")
+    path("home/", home, name="home"),
 ]

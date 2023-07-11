@@ -24,12 +24,9 @@ class UploadCSVTestCase(TestCase):
         )
 
         csv_file = SimpleUploadedFile('test_file.csv', csv_content, content_type='text/csv')
-        
-        data = {
-            'param1': 'valor1',
-        }
 
-        request = request_factory.post(url, data=data)
+        request = request_factory.post(url)
+        request.POST['api_key'] = 'YOUR_API_KEY'
         request.FILES['file_csv'] = csv_file
         
         # Realizar la solicitud POST
