@@ -18,8 +18,8 @@ ENV/
 
 # django migrations 
 #
-**/migrations/**
-!**/migrations
-!**/migrations/__init__.py
+**/migrations/
 
-__pycache__/
+**/__pycache__/
+
+db.sqlite3
