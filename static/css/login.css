@@ -9,7 +9,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background: var(--color-primary);
+    background: #19660b63;
 }
 
 .container .login-container {

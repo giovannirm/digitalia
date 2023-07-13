@@ -1,8 +1,7 @@
 from django.db import models
 from api.constants import STATES, ROLES
 # Create your models here.
-class Shipment(models.Model):
-    
+class Shipment(models.Model):    
     user_id = models.IntegerField()
     state  = models.CharField(max_length=1, choices=STATES)
     created = models.DateTimeField(auto_now_add=True)

@@ -6,6 +6,19 @@
     gap: 1em;
 }
 
+.content .btn-logout {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    cursor: pointer;
+    padding: 0.5em 1em;
+    font-size: 1.1em;
+    background: #28a745;
+    color: white;
+    border: none;
+}
+
 .content-right {
     width: 40%;
     flex-shrink: 0;
@@ -62,11 +75,11 @@
     border-radius: 1em;
 }
 
-  .defect{
+.user {
     border: 1px solid #ced4da;
 }
 
-.assist {
+.assistant {
     color: white;
     background: #007bff;
 }
@@ -94,14 +107,9 @@
     padding: 1em;
 }
 
-.disabled {
-    pointer-events: none;
-    opacity: 0.5;
-}
-
 @media  screen and (max-width: 700px) {
     .content {
-        padding: 1em 0;
+        padding-bottom: 1em;
         flex-direction: column;
         overflow: auto;
     }

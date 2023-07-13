@@ -25,11 +25,7 @@
                 <input type="password" placeholder="Ingrese su contraseña" name="password" required>
             </div>
 
-            {% if messages %}
-                {% for message in messages %}
-                    <div class="error">{{ message }}</div>
-                {% endfor %}
-            {% endif %}
+            <div id="error"></div>
             <button type="submit" class="register">Iniciar Sesión</button>
         </div>  
     </form>

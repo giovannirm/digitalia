@@ -11,22 +11,25 @@
 
 {% block content %}
 <div class="content">
+    <a class="btn-logout" href="{% url 'logout' %}">
+      Cerrar Sesión
+    </a>
     <div class="content-right">
-      <h1 class="card-header text-center">DIGITALIA</h1>
+      <h1 class="card-header">DIGITALIA</h1>
       <div class="card-body">
         <form id="csvForm" method="POST" enctype="multipart/form-data">
           {% csrf_token %}
-          <label for="api_key" class="form-label">Ingresa tu clave API secreta de OpenAI</label>
-          <input class="form-control mb-2" required type="text" autofocus="autofocus" name="api_key">
-          <label for="file_csv" class="form-label">Ingresa el archivo CSV a analizar</label>
-          <input class="form-control mb-2" required type="file" name="file_csv" accept=".csv">
-          <button class="btn btn-success fw-bold" type="submit">
+          <label for="api_key">Ingresa tu clave API secreta de OpenAI</label>
+          <input required type="text" autofocus="autofocus" name="api_key">
+          <label for="file_csv">Ingresa el archivo CSV a analizar</label>
+          <input required type="file" name="file_csv" accept=".csv">
+          <button type="submit">
             Analizar
           </button>
         </form>
       </div>
     </div>
-    <div id="chatHistory" class="chat-history mt-3"></div>
+    <div id="chatHistory" class="chat-history"></div>
 </div>
 {% endblock %}
 
