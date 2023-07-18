@@ -10,11 +10,12 @@ import openai
 import tiktoken
 
 @csrf_exempt
-def upload_csv(request):
+def upload_csv(request):    
     if not request.user.is_authenticated:
         return JsonResponse({'message': 'No te creas hábil, tienes que loguearte.'}, status=500)
     
     if request.method == 'POST':
+  
         uploaded_file = request.FILES.get('file_csv')
         api_key = request.POST.get('api_key')
 
@@ -59,7 +60,6 @@ def upload_csv(request):
                 
                 
                 total_tokens = num_tokens_from_messages(messages=messages)
-                # print(total_tokens)
                 if total_tokens < LIMIT_TOKENS:
                     response = openai.ChatCompletion.create(
                         model=MODEL,
@@ -68,7 +68,7 @@ def upload_csv(request):
                         temperature=TEMPERATURE,
                     )
                     
-                    print(response)
+                    # print(response)
 
                     formatted_response = response['choices'][0]['message']['content']
                     messages.append({ 'role': 'assistant', 'content': formatted_response })
@@ -133,7 +133,7 @@ def upload_csv(request):
                 'type': type(e).__name__,
                 'message': str(e)
             }
-            print(exception_data)
+
             return JsonResponse({'message': 'Error al procesar el archivo CSV.', 'information': exception_data}, status=500)
         
     return JsonResponse({'message': 'Método no permitido'}, status=405)
@@ -154,8 +154,11 @@ def user_authenticate(request):
       
 @csrf_exempt
 def user_logout(request):
-    logout(request)
-    return JsonResponse({'message': 'Adiós', 'isLogout': True}, status=200)
+    if request.method == 'POST':
+        logout(request)
+        return JsonResponse({'message': 'Adiós', 'isLogout': True}, status=200)
+    else:
+        return JsonResponse({'message': 'Método no permitido', 'isLogout': False}, status=200)
 
 def num_tokens_from_messages(messages):
     model = 'gpt-3.5-turbo'
