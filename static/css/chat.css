@@ -1,12 +1,25 @@
+header {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 0.5em 1.5em;
+    height: 3em;
+    margin-bottom: 0.5em;
+}
+
+header img {
+    cursor: pointer;
+}
+
 .content {
-    height: 100vh;
+    height: calc(100vh - 4em);
     overflow: hidden;
     width: 100%;
     display: flex;
     gap: 1em;
 }
 
-.content .btn-logout {
+header a.btn-logout {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -14,9 +27,10 @@
     cursor: pointer;
     padding: 0.5em 1em;
     font-size: 1.1em;
-    background: #28a745;
+    background: #741717;
     color: white;
     border: none;
+    border-radius: 0.5em;
 }
 
 .content-right {
